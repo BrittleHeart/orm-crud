@@ -1,8 +1,26 @@
-<h1>Simple form</h1>
+<div class="heading d-flex justify-content-around align-items-center">
+  <h1>All users</h1>
+<a href="/action/create"><button class="btn btn-dark btn-block">Utwórz</button></a>
+</div>
 
-<form action="/process" method="POST">
-  <input type="hidden" name="_csrf" value="{{csrfToken}}">
-  
-  Favorite color: <input type="text" name="favoriteColor">
-  <button type="submit">Submit</button>
-</form>
+<hr>
+
+{{#if users}}
+
+<ul>
+  {{#each users}}
+    <li class="text-center">
+      {{dataValues.userId}} - name: {{dataValues.name}}, email: {{dataValues.email}}
+      <form action="/action/destroy/{{dataValues.userId}}?_method=DELETE" method="post" class="d-inline">
+        <button type="submit" class="btn btn-info d-inline">Usuń</button>
+      </form>
+      <a href="/action/edit/{{dataValues.userId}}" class="btn btn-warning">Edit</a>
+    </li>
+  {{/each}}
+</ul>
+
+{{/if}}
+
+{{#else}}
+  <h2>No data</h2>
+{{/else}}

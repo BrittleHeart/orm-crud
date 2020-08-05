@@ -9,7 +9,7 @@ class UserController {
         const users = await User.findAll()
 
         if (users)
-            return await res.status(200).send({users})
+            return await res.status(200).render('home', {users: users})
         else
             return await res.status(200).send('Could not find any users')        
     }
@@ -135,6 +135,17 @@ class UserController {
                 return await res.status(200).send(`User with id = ${user.userId} has been updated`)
             })
         })
+    }
+
+    async destroy(req, res) {
+        const {id} = req.params
+        
+        if(!id || isNaN(id))
+            throw new Error('Id param must be set and has to be integer value')
+            
+        await User.destroy({where: {userId: id}})
+
+        return await res.status(200).redirect('/')
     }
 }
 
