@@ -1,6 +1,6 @@
 import {app, csrfProtection} from '../server'
-// import UserController from '../app/http/controllers/UserController'
+import UserController from '../app/http/controllers/UserController'
 
-// const user = new UserController()
+const user = new UserController()
 
-app.get('/', (req, res) => res.send('Ok'))
+app.get('/', async (req, res) => await user.index(req, res))
