@@ -1,0 +1,44 @@
+{
+  "name": "ormcrud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./dist/server.bundle.js",
+    "dev": "nodemon ./dist/server.bundle.js -q",
+    "build-js": "webpack",
+    "watch-js": "webpack --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "csurf": "^1.11.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.1.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "sequelize": "^6.3.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^4.2.0",
+    "img-loader": "^3.0.1",
+    "nodemon": "^2.0.4",
+    "resolve-url-loader": "^3.1.1",
+    "sass-loader": "^9.0.2",
+    "sequelize-cli": "^6.2.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-node-externals": "^2.5.0"
+  }
+}
