@@ -4,10 +4,11 @@ import connection from '../config/database'
 const Users = connection.define('users', {
     userId: {
         type: Sequelize.INTEGER,
+        autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    
+
     name: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -27,12 +28,14 @@ const Users = connection.define('users', {
 
     createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.NOW
     },
 
     updatedAt: {
         type: Sequelize.DATE,
-        allowNull: true
+        allowNull: true,
+        defaultValue: Sequelize.NOW
     },
 
     deletedAt: {
