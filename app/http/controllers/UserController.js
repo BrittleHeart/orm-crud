@@ -58,7 +58,7 @@ class UserController {
 
             let escapedPassword = escape(password)
 
-            if(!escapedPassword || escapedPasswordConfirmation !== password)
+            if(!escapedPassword || escapedPasswordConfirmation !== escapedPassword)
                 return await res.status(400).send('Password value must be set and passwords must be the same!')
 
             bcrypt.hash(escapedPassword, salt, async (error, hash) => {
