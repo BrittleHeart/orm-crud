@@ -6,6 +6,7 @@ import logger from 'morgan'
 import expressHandlebars from 'express-handlebars'
 import * as path from 'path'
 import * as fs from 'fs'
+import connection from './config/database'
 
 export const app = express()
 export const csrfProtection = csurf({cookie: true})
@@ -19,13 +20,21 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 app.use(logger('dev'))
 
+connection.authenticate()
+    .then(() => console.log(`Connection succeed 😍`))
+    .catch(error => new Error(`Invalid Credencials 😫: ${error}`))
+
 app.engine('handlebars', expressHandlebars({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
 
 fs.readdir(path.resolve('./routes'), (error, files) => {
     if(error) throw new Error(`Could not find typed directory: ${error.stack}`)
 
-    files.forEach(file => require(`./routes/${file}`))
+    if(files.length)
+        files.forEach(file => require(`./routes/${file}`))
+    else
+        throw new Error(`The directory is empty. Please create some files first 🤓`)
+
 })
 
 app.listen(5000, () => console.log('Server has been exposed here -> http://localhost:5000'))

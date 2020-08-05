@@ -1,3 +1,6 @@
 import {app, csrfProtection} from '../server'
+// import UserController from '../app/http/controllers/UserController'
 
-app.get('/', (req, res) => res.render('home'))
+// const user = new UserController()
+
+app.get('/', (req, res) => res.send('Ok'))
