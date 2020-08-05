@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import csurf from 'csurf'
 import logger from 'morgan'
 import expressHandlebars from 'express-handlebars'
+import methodOverride from 'method-override'
 import * as path from 'path'
 import * as fs from 'fs'
 import connection from './config/database'
@@ -15,6 +16,7 @@ app.use(express.static(path.resolve('./public/')))
 app.use(express.static(path.resolve('../node_modules/')))
 
 app.use(bodyParser.urlencoded({extended: false}))
+app.use(methodOverride('_method'))
 app.use(bodyParser.json())
 
 app.use(cookieParser())

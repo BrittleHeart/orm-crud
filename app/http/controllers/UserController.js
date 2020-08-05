@@ -76,6 +76,66 @@ class UserController {
             })
         })
     }
+
+    async edit(req, res) {
+        const {id} = req.params
+
+        if(!id || isNaN(id))
+            throw new Error('Id param must be set and has to be integer value')
+
+        const user = await User.findOne({
+            where: {userId: id}
+        })
+
+        return await res.render('edit', {csrfToken: req.csrfToken(), userInfo: user})
+    }
+
+    async update(req, res) {
+        let {name, password} = req.body
+        const {id} = req.params
+
+        if(!id || isNaN(id))
+            throw new Error('Id param must be set and has to be integer value')
+
+        if(!name || !password)
+            return await res.status(400).send('All values name and password, must be set')
+
+        const user = await User.findOne({
+            where: {
+                userId: id
+            }
+        })
+
+        if(name === user.name) {
+            await res.status(200).send(`User with id = ${user.userId} has been updated`)
+
+            return await User.update({name: name}, {where: {userId: id}})
+        }
+        
+        bcrypt.compare(password, user.password, async (error, match) => {
+            if(error) throw new Error(`Something went wrong during comparing: ${error}`)
+
+            if(match) {
+                await res.status(200).send(`User with id = ${user.userId} has been updated`)
+
+                return await User.update({password: password}, {where: {userId: id}})
+            }
+        })
+
+        bcrypt.genSalt(10, (error, salt) => {
+            if(error) throw new Error(`🤕 Something went wrong during generating salt, Try again`)
+
+            bcrypt.hash(password, salt, async (error, hash) => {
+                if(error) throw new Error('🤕 Invalid Salt or placed data. Try again')
+
+                password = hash
+
+                await User.update({name: name, password: password},{where: {userId: id}})
+
+                return await res.status(200).send(`User with id = ${user.userId} has been updated`)
+            })
+        })
+    }
 }
 
 export default UserController
