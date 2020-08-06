@@ -7,17 +7,31 @@
 
 {{#if users}}
 
-<ul>
-  {{#each users}}
-    <li class="text-center">
-      {{dataValues.userId}} - name: {{dataValues.name}}, email: {{dataValues.email}}
-      <form action="/action/destroy/{{dataValues.userId}}?_method=DELETE" method="post" class="d-inline">
-        <button type="submit" class="btn btn-info d-inline">Usuń</button>
-      </form>
-      <a href="/action/edit/{{dataValues.userId}}" class="btn btn-warning">Edit</a>
-    </li>
-  {{/each}}
-</ul>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>User id</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each users}}
+      <tr>
+        <td>{{dataValues.userId}}</td>
+        <td>{{dataValues.name}}</td>
+        <td>{{dataValues.email}}</td>
+        <td>
+          <form action="/action/destroy/{{dataValues.userId}}?_method=DELETE" method="post" class="d-inline">
+            <button type="submit" class="btn btn-info d-inline">Usuń</button>
+          </form>
+          <a href="/action/edit/{{dataValues.userId}}" class="btn btn-warning">Edit</a>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
 
 {{/if}}
 
