@@ -35,7 +35,7 @@ class UserController {
     }
 
     create(req, res) {
-        return res.render('create', {csrfToken: req.csrfToken()})
+        return res.render('users/create', {csrfToken: req.csrfToken()})
     }
 
     async register(req, res) {
@@ -87,7 +87,7 @@ class UserController {
             where: {userId: id}
         })
 
-        return await res.render('edit', {csrfToken: req.csrfToken(), userInfo: user})
+        return await res.render('users/edit', {csrfToken: req.csrfToken(), userInfo: user})
     }
 
     async update(req, res) {

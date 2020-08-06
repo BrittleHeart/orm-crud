@@ -16,4 +16,3 @@ app.delete('/action/destroy/:id', async (req, res) => await user.destroy(req, re
 // Authenticate
 app.get('/authenticate/login', csrfProtection, (req, res) => authenticate.login(req, res))
 app.post('/authenticate/process', csrfProtection, async (req, res) => await authenticate.authenticate(req, res))
-app.get('/authenticate/dashboard', (req, res) => authenticate.dashboard(req, res))
