@@ -72,7 +72,7 @@ class UserController {
                     }
                 )
 
-                await res.status(201).send('User has been created')
+                await res.status(201).redirect('/')
             })
         })
     }
@@ -107,18 +107,18 @@ class UserController {
         })
 
         if(name === user.name) {
-            await res.status(200).send(`User with id = ${user.userId} has been updated`)
+            await User.update({name: name}, {where: {userId: id}})
 
-            return await User.update({name: name}, {where: {userId: id}})
+            return res.redirect('/')
         }
         
         bcrypt.compare(password, user.password, async (error, match) => {
             if(error) throw new Error(`Something went wrong during comparing: ${error}`)
 
             if(match) {
-                await res.status(200).send(`User with id = ${user.userId} has been updated`)
+                await User.update({password: password}, {where: {userId: id}})
 
-                return await User.update({password: password}, {where: {userId: id}})
+                return res.redirect('/')
             }
         })
 
@@ -132,7 +132,7 @@ class UserController {
 
                 await User.update({name: name, password: password},{where: {userId: id}})
 
-                return await res.status(200).send(`User with id = ${user.userId} has been updated`)
+                return res.redirect('/')
             })
         })
     }
