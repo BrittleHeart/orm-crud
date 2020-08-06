@@ -17,7 +17,7 @@ app.use(expressSession({
     secret: 'iasid992142j9$!farqrtqwfq<24141!@$!1r1!1ffsds_351Qfw3!$!',
     resave: true,
     saveUninitialized: true,
-    cookie: {secure: false, sameSite: false}
+    cookie: {secure: false, sameSite: false, maxAge: 3600 * 1000}
 }))
 
 app.use(express.static(path.resolve('./public/')))

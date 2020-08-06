@@ -32,10 +32,7 @@ class AuthenticateController {
             if(match && escapedEmail === user.email) {
                 req.session.userInfo = {name: user.name, email: user.email}
 
-                return await res.render('users/dashboard', {
-                    errors: req.session.error, 
-                    userInfo: req.session.userInfo
-                })
+                return await res.redirect('/authenticate/dashboard')
             } else {
                 req.session.error = {type: 'error', message: 'Invalid Credencials'}
 
@@ -49,6 +46,11 @@ class AuthenticateController {
         res.session.error = false
 
         res.redirect('/authenticate/login')
+    }
+
+    dashboard(req, res) {
+        const {name, email} = req.session.userInfo
+        return res.json({name, email})
     }
 }
 
