@@ -24,3 +24,5 @@ const Authorization = connection.define('authorizations', {
         allowNull: true
     }
 })
+
+export default Authorization
