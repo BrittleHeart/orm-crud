@@ -9,9 +9,21 @@ import methodOverride from 'method-override'
 import * as path from 'path'
 import * as fs from 'fs'
 import connection from './config/database'
+import nodeMailer from 'nodemailer'
 
 export const app = express()
 export const csrfProtection = csurf({cookie: true})
+
+export const transporter = nodeMailer.createTransport({
+    pool: true,
+    host: "smtp.poczta.onet.pl",
+    port: 465,
+    secure: true,
+    auth: {
+      user: 'skrillexpl@op.pl',
+      pass: 'B+GB!6EwpgO%GbyL',
+    },
+})
 
 app.use(expressSession({
     secret: 'iasid992142j9$!farqrtqwfq<24141!@$!1r1!1ffsds_351Qfw3!$!',

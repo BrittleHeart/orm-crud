@@ -42,11 +42,6 @@ const Users = connection.define('users', {
         type: Sequelize.DATE,
         allowNull: true
     },
-
-    authorizedAt: {
-        type: Sequelize.DATE,
-        allowNull: true
-    }
 })
 
 export default Users
