@@ -1,6 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
+import expressSession from 'express-session'
 import csurf from 'csurf'
 import logger from 'morgan'
 import expressHandlebars from 'express-handlebars'
@@ -12,6 +13,13 @@ import connection from './config/database'
 export const app = express()
 export const csrfProtection = csurf({cookie: true})
 
+app.use(expressSession({
+    secret: 'iasid992142j9$!farqrtqwfq<24141!@$!1r1!1ffsds_351Qfw3!$!',
+    resave: true,
+    saveUninitialized: true,
+    cookie: {secure: false, sameSite: false}
+}))
+
 app.use(express.static(path.resolve('./public/')))
 app.use(express.static(path.resolve('../node_modules/')))
 
@@ -21,6 +29,8 @@ app.use(bodyParser.json())
 
 app.use(cookieParser())
 app.use(logger('dev'))
+
+app.set('trust proxy', 1)
 
 connection.authenticate()
     .then(() => console.log(`Connection succeed 😍`))
