@@ -41,6 +41,11 @@ const Users = connection.define('users', {
     deletedAt: {
         type: Sequelize.DATE,
         allowNull: true
+    },
+
+    authorizedAt: {
+        type: Sequelize.DATE,
+        allowNull: true
     }
 })
 
