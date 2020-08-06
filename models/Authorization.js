@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize'
 import connection from '../config/database'
+import Users from './User'
 
 const Authorization = connection.define('authorizations', {
     authorizationId: {
@@ -24,5 +25,7 @@ const Authorization = connection.define('authorizations', {
         allowNull: true
     }
 })
+
+Authorization.hasMany(Users)
 
 export default Authorization

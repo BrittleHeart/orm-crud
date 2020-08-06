@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize'
 import connection from '../config/database'
+import Authorization from './Authorization'
 
 const Users = connection.define('users', {
     userId: {
@@ -43,5 +44,7 @@ const Users = connection.define('users', {
         allowNull: true
     },
 })
+
+Users.belongsTo(Authorization)
 
 export default Users
