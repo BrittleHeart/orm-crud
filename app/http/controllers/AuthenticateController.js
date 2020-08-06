@@ -43,6 +43,13 @@ class AuthenticateController {
             }
         })
     }
+
+    async logout(req, res) {
+        req.session.userInfo = false
+        res.session.error = false
+
+        res.redirect('/authenticate/login')
+    }
 }
 
 export default AuthenticateController

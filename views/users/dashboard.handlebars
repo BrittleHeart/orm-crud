@@ -1,9 +1,5 @@
-{{#if errors}}
-    <div class="alert alert-danger">
-        <h1>Something went wrong</h1>
-        <p>{{errors.type}}</p>
-        <p>{{errors.message}}</p>
-    </div>
-{{/if}}
-
 <h1>Witaj {{userInfo.name}}</h1>
+
+<form action="/authenticate/logout" method="POST">
+    <button type="submit" class="btn btn-info">Logout</button>
+</form>
