@@ -1,7 +1,7 @@
 import {app, csrfProtection} from '../server'
 import UserController from '../app/http/controllers/UserController'
 import AuthenticateController from '../app/http/controllers/AuthenticateController'
-import { checkSession } from '../app/http/middlewares/authorizationMiddleware'
+import { checkSession, closeLoginForm } from '../app/http/middlewares/authorizationMiddleware'
 
 const user = new UserController()
 const authenticate = new AuthenticateController()
@@ -15,7 +15,7 @@ app.put('/action/update/:id', csrfProtection , async (req, res) => await user.up
 app.delete('/action/destroy/:id', async (req, res) => await user.destroy(req, res))
 
 // Authenticate
-app.get('/authenticate/login', csrfProtection, (req, res) => authenticate.login(req, res))
+app.get('/authenticate/login', [csrfProtection, closeLoginForm], (req, res) => authenticate.login(req, res))
 app.post('/authenticate/process', csrfProtection, async (req, res) => await authenticate.authenticate(req, res))
 app.post('/authenticate/logout', async (req, res) => await authenticate.logout(req, res))
 

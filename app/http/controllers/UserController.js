@@ -7,9 +7,10 @@ const utils = new UtilsController()
 class UserController {
     async index(req, res) {
         const users = await User.findAll()
+        const {userInfo} = req.session
 
         if (users)
-            return await res.status(200).render('home', {users: users})
+            return await res.status(200).render('home', {users: users, logged: userInfo})
         else
             return await res.status(200).send('Could not find any users')        
     }

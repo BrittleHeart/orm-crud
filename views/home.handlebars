@@ -1,8 +1,14 @@
-<a href="/authenticate/login" class="btn btn-info">Login</a>
+{{#if logged}}
+  <a href="/authenticate/dashboard" class="btn btn-primary">Dashboard</a>
+{{/if}}
+
+{{#unless logged}}
+  <a href="/authenticate/login" class="btn btn-info">Login</a>
+{{/unless}}
 
 <div class="heading d-flex justify-content-around align-items-center">
   <h1>All users</h1>
-<a href="/action/create"><button class="btn btn-dark btn-block">Utwórz</button></a>
+  <a href="/action/create"><button class="btn btn-dark btn-block">Utwórz</button></a>
 </div>
 
 <hr>
