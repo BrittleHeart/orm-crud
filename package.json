@@ -7,7 +7,9 @@
     "start": "node ./dist/server.bundle.js",
     "dev": "nodemon ./dist/server.bundle.js -q",
     "build-js": "webpack",
-    "watch-js": "webpack --watch"
+    "watch-server-js": "webpack --watch",
+    "watch-react-js": "webpack --config webpack-react.config.js --watch",
+    "watch-js": "concurrently \"watch-server-js\" \"watch-react-js\""
   },
   "author": "",
   "license": "ISC",
@@ -35,6 +37,7 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
+    "concurrently": "^5.2.0",
     "css-loader": "^4.2.0",
     "img-loader": "^3.0.1",
     "node-sass": "^4.14.1",
