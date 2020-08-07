@@ -31,8 +31,6 @@ const Authorization = connection.define('authorizations', {
     }
 })
 
-Authorization.associate = models => {
-    Authorization.hasOne(models.users, {foreignKey: 'userId'})
-}
+Authorization.associate = models => Authorization.hasOne(models.users, {foreignKey: 'userId'})
 
 export default Authorization
