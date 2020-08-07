@@ -6,10 +6,7 @@
   "scripts": {
     "start": "node ./dist/server.bundle.js",
     "dev": "nodemon ./dist/server.bundle.js -q",
-    "build-js": "webpack",
-    "watch-server-js": "webpack --watch",
-    "watch-react-js": "webpack --config webpack-react.config.js --watch",
-    "watch-js": "concurrently \"watch-server-js\" \"watch-react-js\""
+    "build-js": "concurrently \"webpack\" \"webpack --config webpack-react.config.js\""
   },
   "author": "",
   "license": "ISC",

@@ -32,8 +32,7 @@ app.use(expressSession({
     cookie: {secure: false, sameSite: false, maxAge: 3600 * 1000}
 }))
 
-app.use(express.static(path.resolve('./public/')))
-app.use(express.static(path.resolve('../node_modules/')))
+app.use(express.static('dist/'))
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(methodOverride('_method'))

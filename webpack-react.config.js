@@ -10,7 +10,10 @@ module.exports = {
     target: 'web',
     module: {
         rules: [
-            {test: /^.js|.jsx$/, use: ['babel-loader']}
+            {test: /\.js$|jsx/, use: ['babel-loader'], exclude: /node_modules/},
+            {test: /^.(jpg|jpeg|svg|bmp|gif|ttf)$/, use: ['img-loader']},
+            {test: /^.css$/, use: ['css-loader', 'style-loader', 'resolve-url-loader']},
+            {test: /^.scss$/, use: ['sass-loader', 'style-loader', 'resolve-url-loader']}
         ]
     }
 }
