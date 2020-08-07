@@ -15,6 +15,11 @@ const Authorization = connection.define('authorizations', {
         allowNull: false
     },
 
+    userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+
     createdAt: {
         type: Sequelize.DATE,
         allowNull: false
@@ -26,6 +31,8 @@ const Authorization = connection.define('authorizations', {
     }
 })
 
-Authorization.hasMany(Users)
+Authorization.associate = models => {
+    Authorization.hasOne(models.users, {foreignKey: 'userId'})
+}
 
 export default Authorization

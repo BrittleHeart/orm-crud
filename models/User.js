@@ -45,6 +45,6 @@ const Users = connection.define('users', {
     },
 })
 
-Users.belongsTo(Authorization)
+Users.associate = models => Users.belongsTo(models.authorizations)
 
 export default Users
