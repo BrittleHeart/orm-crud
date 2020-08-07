@@ -54,6 +54,11 @@ class AuthenticateController {
             if(error) throw new Error(`🤕 Something went wrong during compare passwords`)
 
             if(match && escapedEmail === user.email) {
+                const {errors} = req.session
+
+                if(errors)
+                    errors = false
+
                 req.session.userInfo = {name: user.name, email: user.email}
 
                 await this.twoFactorAuthentication(req, res)
@@ -69,7 +74,7 @@ class AuthenticateController {
 
     async logout(req, res) {
         req.session.userInfo = false
-        res.session.error = false
+        req.session.error = false
 
         res.redirect('/authenticate/login')
     }
