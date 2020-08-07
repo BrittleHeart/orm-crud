@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize'
 
-const connection = new Sequelize('database', 'user', 'password', {
-    host: 'localhost',
+const connection = new Sequelize('ormcrud', process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, {
+    host: process.env.POSTGRES_HOST,
     dialect: 'postgres',
 
     pool: {
