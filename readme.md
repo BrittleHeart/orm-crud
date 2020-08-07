@@ -10,7 +10,7 @@ First of install dependencies
 npm install
 ```
 
-If you want start development server just type
+If you want to start development server just type
 
 ```bash
 npm run dev
