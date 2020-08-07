@@ -1,6 +1,7 @@
 import {app, csrfProtection} from '../server'
 import UserController from '../app/http/controllers/UserController'
 import AuthenticateController from '../app/http/controllers/AuthenticateController'
+import { checkSession } from '../app/http/middlewares/authorizationMiddleware'
 
 const user = new UserController()
 const authenticate = new AuthenticateController()
@@ -18,4 +19,4 @@ app.get('/authenticate/login', csrfProtection, (req, res) => authenticate.login(
 app.post('/authenticate/process', csrfProtection, async (req, res) => await authenticate.authenticate(req, res))
 app.post('/authenticate/logout', async (req, res) => await authenticate.logout(req, res))
 
-app.get('/authenticate/dashboard', (req, res) => authenticate.dashboard(req, res))
+app.get('/authenticate/dashboard', checkSession , async (req, res) => await authenticate.dashboard(req, res))

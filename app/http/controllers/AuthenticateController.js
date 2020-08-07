@@ -67,7 +67,7 @@ class AuthenticateController {
             } else {
                 req.session.error = {type: 'error', message: 'Invalid Credencials'}
 
-                return await res.render('users/login', {errors: req.session.error})
+                return await res.redirect('/authenticate/login')
             }
         })
     }
@@ -81,7 +81,7 @@ class AuthenticateController {
 
     dashboard(req, res) {
         const {name, email} = req.session.userInfo
-        return res.json({name, email})
+        return res.render('users/dashboard', {name, email})
     }
 }
 

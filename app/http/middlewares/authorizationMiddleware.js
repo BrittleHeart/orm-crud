@@ -1,6 +1,8 @@
+export const checkSession = (req, res, next) => {
+    const {userInfo} = req.session
+    
+    if(!userInfo)
+        return res.redirect('/authenticate/login')
 
-export const checkIfAuthorized = async (req, res, next) => {
-    const Authorization = new Promise((resolve, reject) => resolve())
-
-    const authorization = await Authorization.findOne({where: {authorizedAt: Authorization.fn('between now and now - 7')}})
+    next()
 }
