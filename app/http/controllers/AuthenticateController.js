@@ -3,6 +3,7 @@ import User from '../../../models/User'
 import {transporter} from '../../../server'
 import UtilsController from './UtilsController'
 
+
 const utils = new UtilsController()
 
 class AuthenticateController {
@@ -11,19 +12,18 @@ class AuthenticateController {
     }
 
     async twoFactorAuthentication(req, res, code) {
-        const {email, name} = req.body
-        // let code = Math.floor(Math.random() * 5000)
+        const {email} = req.body
 
         let infoMessage = await transporter.sendMail({
             from: '"Bartosz Pazdur 👻" <skrillexpl@op.pl>', // sender address
             to: email, // list of receivers
-            subject: `Confirm login process ${name}`, // Subject line
+            subject: `Confirm login process ${email}`, // Subject line
             html: `
                 <div style="text-align: center; margin: 0 auto;">
                     <h1>Ktoś zalogował się na Twoje konto</h1>
                     <p>Jzeli to Ty, przepisz ponizszy kod, jeśli to nie Ty, NATYCHMIAST skontakuj się z administratorem</p>
 
-                    <div style="padding: 7px 8px; color: #ffffff; font-size: 20px;">
+                    <div style="padding: 7px 8px; color: #ffffff; background-color: rgba(25, 25, 25, .6); border: 1px solid rgba(25, 25, 25, .6); font-size: 20px;">
                         ${code}
                     </div>
                 </div>
@@ -33,7 +33,7 @@ class AuthenticateController {
         console.log(`Message sent ${infoMessage.messageId}`)
     }
 
-    async authenticate(req, res) {
+    async authenticate(req, res, code) {
         const {email, password} = req.body
 
         const escapedEmail = escape(email)
@@ -61,7 +61,7 @@ class AuthenticateController {
 
                 req.session.userInfo = {name: user.name, email: user.email}
 
-                await this.twoFactorAuthentication(req, res)
+                await this.twoFactorAuthentication(req, res, code)
 
                 return await res.redirect('/authenticate/dashboard')
             } else {
